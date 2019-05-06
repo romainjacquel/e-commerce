@@ -16,10 +16,8 @@ handleSubmit = (credentials) =>{
 
     render(){
         return(
-            <div>
 <div className = "container formLogin">
-<h1 className = "title">> Connexion</h1>
-<Form className  onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+{/* <Form className  onSubmit={this.props.handleSubmit(this.handleSubmit)}>
  <Form.Group controlId="loginForm" >
    <Form.Label>Email</Form.Label>
    <Form.Control type="email" name = {FIELDS.email} placeholder="Enter email" />
@@ -35,9 +33,9 @@ handleSubmit = (credentials) =>{
  <Button variant="primary" type="submit">
    Connect
  </Button>
- </Form>
+ </Form> */}
 
-{/* <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+ <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
                 <div className="row justify-content-md-center">
                     <h1 className='title'>Connexion</h1>
                 </div>
@@ -53,13 +51,11 @@ handleSubmit = (credentials) =>{
                         <Field name={FIELDS.password} component="input" type="password" className="form-control" />
                     </fieldset>
                 </div>
-
-                    <button type="submit" className="btn btn-primary btn-raised">Connexion</button>
                 <div className="row justify-content-md-center">
+                    <button type="submit" className="btn btn-primary btn-raised">Connexion</button>
                 </div>
-            </form> */}
+            </form> 
     </div>
-            </div>
            
         )
     }
