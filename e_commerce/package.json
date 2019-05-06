@@ -1,4 +1,4 @@
-{
+{ "proxy": "http://localhost:3090",
   "name": "e_commerce",
   "version": "0.1.0",
   "private": true,

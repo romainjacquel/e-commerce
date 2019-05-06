@@ -66,7 +66,7 @@ handleSubmit = (credentials) =>{
 }
 
  const loginForm = reduxForm({
-    form:"login",
+    form:"loginForm",
     fields : Object.keys(FIELDS)
     })(Login);
 

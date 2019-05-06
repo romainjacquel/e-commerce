@@ -1,37 +1,44 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jwt-simple')
 const User = require('../models/user')
+const lodash = require('lodash')
+
+
+function getTokenForUser(user){
+    const timeStamp = new Date().getTime();
+        return jwt.encode({
+        sub : user.id,
+        iat : timeStamp 
+    }, "secret")
+}
 
 exports.user_signup = (req,res,next)=>{
-    User.find({email:req.body.email}).exec().then(user=>{
-        if(user.length >=1 ){
-            return res.status(409).json({
-                message : "Mail already exists"
-            })
+    const email = req.body.email;
+    const password = req.body.password;
+    
+    User.findOne({email:email}, function(err,existingUser){
+        if(err){
+            return next(err)
+        }
+        if(existingUser){
+            console.log('error email utilisé')
+            return res.status(422).send({error : "Email utilisé"});
+        }
+        if(lodash.isEmpty(email) || lodash.isEmpty(password)){
+            console.log("Eror mdp ou email vide")
+            return res.status(422).send({error:"Email ou mot de passe vide"})
         }else{
-            bcrypt.hash(req.body.password,10, (err,hash)=>{
+            const user = new User({
+                _id : new mongoose.Types.ObjectId(),
+                email:email,
+                password:password
+            })
+            user.save(function(err){
                 if(err){
-                    return res.status(500).json({
-                        error : err
-                    })
-                }else{
-                    const user = new User({
-                        _id : new mongoose.Types.ObjectId(),
-                        email : req.body.email,
-                        password : hash 
-                    })
-                    user.save().then(user =>{
-                        console.log(user)
-                        res.status(201).json({
-                            message: "User created"
-                        })
-                    }).catch(err =>{
-                        res.status(500).json({
-                            error : err
-                        })
-                    });
+                    return next(err);
                 }
+                res.json({token : getTokenForUser(user), id : user._id});
             })
         }
     }).catch()
@@ -39,7 +46,9 @@ exports.user_signup = (req,res,next)=>{
 
 exports.user_login = (req,res,next)=>{
     User.find({email : req.body.email}).exec().then(user=>{
-        if(user.length<1){
+        if(user.length < 1){
+            console.log('user<1',user)
+            console.log(req.body)
             return res.status(401).json({
                 message : "Auth failed"
             })
@@ -52,6 +61,7 @@ exports.user_login = (req,res,next)=>{
                 })
             }
             if(result){
+                console.log(req.body)
                const token = jwt.sign({
                     email : user[0].password,
                     userId : user[0]._id

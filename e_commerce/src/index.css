@@ -44,19 +44,49 @@ code {
   width: 60%;
   height: 30%;
   display: block;
-  margin : 0 auto
+  margin : 0 auto;
+  padding : 1rem
 }
 
 .border_img_detail{
   width: 100%;
-  height: auto
+  height: auto;
+  border : 1px solid black
 }
 
 .price_detail_product{
-  text-align: center;
-  margin-top : 2rem;
+  border-top : 1px solid black;
+  text-decoration: underline;
+  padding: 1rem 0.5rem;
+  text-align : center;
+  font-weight: bold
 }
 
 .titre_detail_product{
-  text-align: center
+  text-align: center;
+  font-weight: bold
+}
+
+.description_product{
+  border-top : 1px solid black
+}
+
+.title_description_product{
+  border-top : 1px solid black;
+  padding: 1rem 1rem 1rem 0.5rem;
+  text-decoration: underline
+}
+
+.text_description_product{
+  padding : 0.5rem 0.5rem;
+}
+
+.title_feature_product{
+  text-decoration: underline;
+  border-top: 1px solid black;
+  padding: 1rem 0.5rem;
+}
+
+.text_feature_product{
+  padding: 0.5rem 0.5rem;
 }

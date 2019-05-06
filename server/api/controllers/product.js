@@ -3,13 +3,15 @@ const Product = require("../models/product")
 
 exports.products_get_all = (req,res,next)=>{
 
-    Product.find().select("name price _id productImage").exec().then(products =>{
+    Product.find().select("name price description feature _id productImage").exec().then(products =>{
         const response = {
             count : products.length,
             products : products.map(product =>{
                 return {
                     name : product.name,
                     price : product.price,
+                    description : product.description,
+                    feature : product.feature,
                     _id : product._id,
                     productImage : product.productImage,
                     request : {
@@ -34,6 +36,8 @@ exports.products_create_product = (req,res,next)=>{
         _id : new mongoose.Types.ObjectId(),
         name : req.body.name,
         price : req.body.price,
+        description : req.body.description,
+        feature : req.body.feature,
         productImage : req.file.path
     })
     product.save().then(product =>{
@@ -43,6 +47,8 @@ exports.products_create_product = (req,res,next)=>{
             createdProduct : {
                 name : product.name,
                 price : product.price,
+                description : product.description,
+                feature : product.feature,
                 _id : product._id,
                 request : {
                     type : "POST",
@@ -58,7 +64,7 @@ exports.products_create_product = (req,res,next)=>{
 
 exports.products_get_one_product = (req,res,next)=>{
     const id = req.params.productId;
-    Product.findById(id).select("name price _id productImage").exec().then((product)=>{
+    Product.findById(id).select("name price description feature _id productImage").exec().then((product)=>{
         console.log(product)
         if(product){
             res.status(200).json({
@@ -106,7 +112,7 @@ exports.products_delete_product = (req,res,next)=>{
                 request : {
                     type : "DELETE",
                     url : "http://localhost:3000/products/" + id,
-                    body : { name : "String", price : "Number"}
+                    body : { name : "String", price : "Number", desription : "String", feature : "String"}
                 }
             })
         }else{

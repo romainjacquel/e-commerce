@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
-import {Navbar, Nav,Button,FormControl,Form} from "react-bootstrap"
+import {Navbar, Nav,Button,FormControl,Form, NavDropdown} from "react-bootstrap"
+import {getAllCategories} from '../../actions/index'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import CategoriesForHeader from "../Render-categories-Header"
 
 class Header extends Component  {
+
+  componentWillMount(){
+    this.props.getAllCategories()
+}
+
+renderCategories(){
+  const {categories} = this.props
+  if(categories){
+      return categories.map((category)=>{
+        return <CategoriesForHeader key={category._id} category = {category}/>
+      })
+  }
+}
+
+
 render () {
 return (
     <header>
@@ -9,6 +28,9 @@ return (
     <Navbar.Brand href="/">E-COMMERCE</Navbar.Brand>
     <Nav className="mr-auto">
       <Nav.Link href="/products">Products</Nav.Link>
+      <NavDropdown title="Categories" id="collasible-nav-dropdown">
+      {this.renderCategories()}
+      </NavDropdown>
       <Nav.Link href="/login">Connexion</Nav.Link>
       <Nav.Link href="/signup">Inscription</Nav.Link>
     </Nav>
@@ -22,4 +44,15 @@ return (
 }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+  return {
+      categories : state.categories
+  }
+}
+
+
+const mapDispatchToProps=(dispatch)=>({
+  ...bindActionCreators({getAllCategories},dispatch)
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header)

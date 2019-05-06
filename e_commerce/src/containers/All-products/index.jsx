@@ -7,9 +7,6 @@ import {Link} from 'react-router'
 
 class AllProducts extends Component  {
 
-constructor(props){
-      super(props)
-}
 componentWillMount(){
       this.props.getAllProducts()
 }
@@ -25,15 +22,15 @@ renderProducts(){
             const URL_DETAIL_PRODUCT = `/product/${product._id}`
 
 
-                  return  <Card style={{ width: '18rem', float : "left",margin : "2rem 1.5rem 0 0"  }} key={product._id}>
+                  return  <Card style={{ width: '20rem', float : "left",margin : "2rem 1.5rem 0 0"  }} key={product._id}>
                   <Card.Img variant="top" height="180px" src={URL_IMG} />
                   <Card.Body>
                     <Card.Title>{product.name}</Card.Title>
                     <Card.Text>
-                    Price : {product.price} €
+                    Prix : {product.price} €
                     </Card.Text>
                     <Button href={URL_DETAIL_PRODUCT} variant="secondary" className="btn_description">Description</Button>
-                    <Button variant="primary">Add to basket</Button>
+                    <Button variant="primary">Ajouter au panier</Button>
                   </Card.Body>
                   </Card>
             })
@@ -53,7 +50,6 @@ return (
 }
 
 const mapStateToProps = (state) => {
-      console.log("---> Le state",state)
       return {
           products : state.products
       }
