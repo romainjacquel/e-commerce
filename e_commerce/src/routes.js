@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import Login from './components/Login'
 import AllProducts from './containers/All-products'
 import DetailProduct from "./containers/Detail-product"
+import Signout from "./components/Signout"
 
 
 // Router : On va mettre toutes nos routes dedans
@@ -18,6 +19,7 @@ class Routes extends Component{
                     {/* User */}
                     <Route exact path="/signup" component={Signup}/>
                     <Route exact path="/login" component={Login}/>
+                    <Route exact path="/logout" component={Signout}/>
                     {/* Return all_product */}
                     <Route exact path="/products" component={AllProducts}/> 
                     {/* Return one_product */}

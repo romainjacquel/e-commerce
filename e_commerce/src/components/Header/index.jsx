@@ -11,6 +11,27 @@ class Header extends Component  {
     this.props.getAllCategories()
 }
 
+renderAuthentificationLink = () =>{
+  if(this.props.isLoggedIn){
+    return(
+      <Nav>
+         <Nav.Link href="/logout">Déconnexion</Nav.Link>
+      </Nav> 
+    )
+  }else{
+    return[
+      <Nav>
+      <Nav.Link href="/login">Connexion</Nav.Link>
+      <Nav.Link href="/signup">Inscription</Nav.Link>
+
+      </Nav>
+      
+      
+    ]
+  }
+}
+
+
 renderCategories(){
   const {categories} = this.props
   if(categories){
@@ -31,8 +52,7 @@ return (
       <NavDropdown title="Categories" id="collasible-nav-dropdown">
       {this.renderCategories()}
       </NavDropdown>
-      <Nav.Link href="/login">Connexion</Nav.Link>
-      <Nav.Link href="/signup">Inscription</Nav.Link>
+      {this.renderAuthentificationLink()}
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -46,7 +66,8 @@ return (
 
 const mapStateToProps = (state) => {
   return {
-      categories : state.categories
+      categories : state.categories,
+      isLoggedIn : state.authentification.isLoggedIn
   }
 }
 

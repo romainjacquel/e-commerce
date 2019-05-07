@@ -10,7 +10,7 @@ const FIELDS = {email : "email", password : "password"}
 class Login extends Component{
 
 handleSubmit = (credentials) =>{
-    console.log('--->crednetial',credentials)
+    console.log('--->credentials',credentials)
     this.props.LoginUser(credentials,this.props.history)
     }
 
@@ -37,7 +37,7 @@ handleSubmit = (credentials) =>{
 
  <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
                 <div className="row justify-content-md-center">
-                    <h1 className='title'>Connexion</h1>
+                    <h1 className='title'>> Connexion</h1>
                 </div>
                 <div className="row justify-content-md-center">
                     <fieldset className='cold-md-4 form-group'>

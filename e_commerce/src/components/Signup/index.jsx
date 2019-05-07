@@ -5,16 +5,8 @@ import {bindActionCreators} from 'redux'
 import {Form,Button} from "react-bootstrap"
 import {connect} from 'react-redux'
 
-const FieldInput = ({ input, type, placeholder, name }) => {
-  return (
-      <Form.Control
-          type={type}
-          name = {name}
-          placeholder={placeholder}
-          value={input.value}
-          onChange={input.onChange} />
-  )
-} 
+const FIELDS = {email : 'email',password:"password"}
+
 
 class Signin extends Component  {
 
@@ -23,27 +15,42 @@ class Signin extends Component  {
     this.props.signupUser(credentials,this.props.history)
   }
 
+  renderInputComponent = field =>{
+    return(
+        <div className="row justify-content-md-center">
+        <fieldset className="cold-md-4 form-group">
+            <label className="bmd-label-floating">{field.label}</label>
+            <input {...field.input} type={field.type} className="form-control" />
+            
+        </fieldset>
+        </div>
+    );
+};
+
 render () {
 return (
 <div className="container">
-     <h1>Formulaire d'inscription</h1>
-    <Form className  onSubmit={this.props.handleSubmit(this.handleSubmit)}>
- <Form.Group controlId="loginForm" >
-   <Form.Label>Email</Form.Label>
-   <Form.Control component = {FieldInput} name="email" type = "email" label= "email" placeholder = "Enter your Email" />
-   <Form.Text className="text-muted">
-     We'll never share your email with anyone else.
-   </Form.Text>
- </Form.Group>
-
- <Form.Group>
-   <Form.Label>Password</Form.Label>
-   <Form.Control component = {FieldInput} name="password" type = "password" label= "password" placeholder="Choose a password"/>
- </Form.Group>
- <Button variant="primary" type="submit">
-   S'inscrire
- </Button>
- </Form>
+<form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+    <div className="row justify-content-md-center">
+        <h1 className="title">> Inscription</h1>
+    </div>
+        <Field
+            name={FIELDS.email}
+            component={this.renderInputComponent}
+            type='email'
+            label='Email'
+        />
+        <Field
+            name={FIELDS.password}
+            component={this.renderInputComponent}
+            type='password'
+            label='Password'
+        />
+        
+        <div className="row justify-content-md-center">
+            <button type='submit' className="btn btn-primary btn-raised">Inscription</button>
+        </div>
+    </form>
       </div>
 )
 }
