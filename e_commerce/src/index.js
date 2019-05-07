@@ -11,6 +11,14 @@ import * as serviceWorker from './serviceWorker';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
+
+// const token = localStorage.getItem('token')
+
+// // Permet de rester connecter grâce à l'exsitence du token
+// if(token){
+//     store.dispatch(setAuthentification(true))
+// }
+
 ReactDOM.render(
 <Provider store={createStoreWithMiddleware(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
 <BrowserRouter>

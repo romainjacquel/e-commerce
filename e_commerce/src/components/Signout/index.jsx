@@ -11,8 +11,9 @@ componentWillMount(){
 
 render () {
 return (
-    <div classname = "container">
-        <h1>Aurevoir</h1>
+    <div classname = "container signout">
+        <h1 className = 'signout_title'>Oups ! Vous nous quittez déjà ?</h1>
+        <p className="signout_text">Dommage ! On espère vous revoir au plus vite ! :)</p>
       </div>
 )
 }

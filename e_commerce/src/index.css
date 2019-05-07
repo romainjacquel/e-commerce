@@ -90,3 +90,15 @@ code {
 .text_feature_product{
   padding: 0.5rem 0.5rem;
 }
+
+.signout_title{
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-top : 30vh;
+  text-align: center;
+}
+
+.signout_text{
+  font-size: 1.5rem;
+  text-align: center;
+}
